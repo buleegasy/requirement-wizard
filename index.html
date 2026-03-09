@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -25,7 +26,7 @@
             background-color: #F8FAFC;
             -webkit-tap-highlight-color: transparent;
         }
-        
+
         /* Step Transitions */
         .step-container {
             display: none;
@@ -33,13 +34,13 @@
             transform: translateX(20px);
             transition: opacity 0.3s ease-out, transform 0.3s ease-out;
         }
-        
+
         .step-container.active {
             display: flex;
             opacity: 1;
             transform: translateX(0);
         }
-        
+
         .step-container.exit {
             display: flex;
             opacity: 0;
@@ -50,63 +51,70 @@
         input[type="radio"] {
             display: none;
         }
-        
+
         .option-card {
             border: 1px solid #E2E8F0;
             transition: all 0.2s;
         }
-        
-        input[type="radio"]:checked + .option-card {
+
+        input[type="radio"]:checked+.option-card {
             border-color: #1E293B;
             background-color: #1E293B;
             color: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        
-        input[type="radio"]:checked + .option-card .price-text {
+
+        input[type="radio"]:checked+.option-card .price-text {
             color: #CBD5E1;
         }
     </style>
 </head>
+
 <body class="text-slate-800 min-h-screen flex flex-col items-center justify-center p-4 selection:bg-blue-100">
 
     <div class="w-full max-w-md">
-        
+
         <!-- Header -->
         <div id="header-section" class="mb-8">
             <h1 class="text-2xl font-semibold tracking-tight text-center mb-6">快速需求评估</h1>
             <!-- Progress Bar -->
             <div class="relative h-1 bg-slate-200 rounded-full overflow-hidden">
-                <div id="progress-bar" class="absolute top-0 left-0 h-full bg-slate-800 rounded-full transition-all duration-300" style="width: 25%;"></div>
+                <div id="progress-bar"
+                    class="absolute top-0 left-0 h-full bg-slate-800 rounded-full transition-all duration-300"
+                    style="width: 25%;"></div>
             </div>
             <p id="step-indicator" class="text-xs text-slate-400 text-center mt-3 font-medium">Step 1 of 4</p>
         </div>
 
         <!-- Main Card -->
-        <div class="bg-white rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.05)] p-6 sm:p-8 min-h-[340px] flex flex-col relative overflow-hidden">
-            
+        <div
+            class="bg-white rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.05)] p-6 sm:p-8 min-h-[340px] flex flex-col relative overflow-hidden">
+
             <form id="wizard-form" class="flex-grow flex flex-col h-full m-0">
                 <!-- Step 1 -->
                 <div id="step-1" class="step-container flex-col flex-grow active">
                     <h2 class="text-lg font-medium mb-6">请选择项目类型</h2>
                     <div class="space-y-3">
                         <label class="block cursor-pointer">
-                            <input type="radio" name="projectType" value="极简单页" onchange="checkValidity()">
-                            <div class="option-card flex items-center justify-between p-4 rounded-xl text-slate-700 bg-transparent hover:border-slate-300 hover:bg-slate-50">
+                            <input type="radio" name="projectType" value="极简单页" onchange="validateStep()">
+                            <div
+                                class="option-card flex items-center justify-between p-4 rounded-xl text-slate-700 bg-transparent hover:border-slate-300 hover:bg-slate-50">
                                 <span class="font-medium text-[15px]">极简单页 HTML</span>
                                 <span class="price-text text-sm text-slate-400">￥19.9</span>
                             </div>
                         </label>
                         <label class="block cursor-pointer">
-                            <input type="radio" name="projectType" value="标准多页" onchange="checkValidity()">
-                            <div class="option-card flex items-center justify-between p-4 rounded-xl text-slate-700 bg-transparent hover:border-slate-300 hover:bg-slate-50">
+                            <input type="radio" name="projectType" value="标准多页" onchange="validateStep()">
+                            <div
+                                class="option-card flex items-center justify-between p-4 rounded-xl text-slate-700 bg-transparent hover:border-slate-300 hover:bg-slate-50">
                                 <span class="font-medium text-[15px]">标准多页展示站</span>
                                 <span class="price-text text-sm text-slate-400">￥149+</span>
                             </div>
                         </label>
                         <label class="block cursor-pointer">
-                            <input type="radio" name="projectType" value="全栈定制" onchange="checkValidity()">
-                            <div class="option-card flex items-center justify-between p-4 rounded-xl text-slate-700 bg-transparent hover:border-slate-300 hover:bg-slate-50">
+                            <input type="radio" name="projectType" value="全栈定制" onchange="validateStep()">
+                            <div
+                                class="option-card flex items-center justify-between p-4 rounded-xl text-slate-700 bg-transparent hover:border-slate-300 hover:bg-slate-50">
                                 <span class="font-medium text-[15px]">复杂全栈系统定制</span>
                                 <span class="price-text text-sm text-slate-400">议价</span>
                             </div>
@@ -122,14 +130,17 @@
                             <label class="block text-sm text-slate-500 mb-3">视觉偏好</label>
                             <div class="grid grid-cols-2 gap-3">
                                 <label class="block cursor-pointer">
-                                    <input type="radio" name="visualStyle" value="简约现代" checked onchange="checkValidity()">
-                                    <div class="option-card p-3 rounded-xl flex items-center justify-center text-sm text-slate-700 hover:bg-slate-50">
+                                    <input type="radio" name="visualStyle" value="简约现代" checked
+                                        onchange="validateStep()">
+                                    <div
+                                        class="option-card p-3 rounded-xl flex items-center justify-center text-sm text-slate-700 hover:bg-slate-50">
                                         简约现代(推荐)
                                     </div>
                                 </label>
                                 <label class="block cursor-pointer">
-                                    <input type="radio" name="visualStyle" value="像素级复刻" onchange="checkValidity()">
-                                    <div class="option-card p-3 rounded-xl flex items-center justify-center text-sm text-slate-700 hover:bg-slate-50">
+                                    <input type="radio" name="visualStyle" value="像素级复刻" onchange="validateStep()">
+                                    <div
+                                        class="option-card p-3 rounded-xl flex items-center justify-center text-sm text-slate-700 hover:bg-slate-50">
                                         像素级复刻
                                     </div>
                                 </label>
@@ -137,7 +148,9 @@
                         </div>
                         <div>
                             <label class="block text-sm text-slate-500 mb-2">参考网站链接 (选填)</label>
-                            <input type="url" name="referenceUrl" id="referenceUrl" placeholder="https://..." class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-800/10 focus:border-slate-800 transition-all text-sm placeholder:text-slate-400" oninput="checkValidity()">
+                            <input type="url" name="referenceUrl" id="referenceUrl" placeholder="https://..."
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-800/10 focus:border-slate-800 transition-all text-sm placeholder:text-slate-400"
+                                oninput="validateStep()">
                         </div>
                     </div>
                 </div>
@@ -145,48 +158,60 @@
                 <!-- Step 3 -->
                 <div id="step-3" class="step-container flex-col flex-grow">
                     <h2 class="text-lg font-medium mb-6">核心功能</h2>
-                    <textarea name="coreFunction" id="coreFunction" placeholder="请用一句话描述需求（例如：做一个蓝白配色的个人简历页）。" class="w-full flex-grow min-h-[140px] px-4 py-4 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-800/10 focus:border-slate-800 transition-all text-[15px] leading-relaxed resize-none placeholder:text-slate-400" oninput="checkValidity()"></textarea>
+                    <textarea name="coreFunction" id="coreFunction" placeholder="请用一句话描述需求（例如：做一个蓝白配色的个人简历页）。"
+                        class="w-full flex-grow min-h-[140px] px-4 py-4 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-800/10 focus:border-slate-800 transition-all text-[15px] leading-relaxed resize-none placeholder:text-slate-400"
+                        oninput="validateStep()"></textarea>
                 </div>
 
                 <!-- Step 4 -->
                 <div id="step-4" class="step-container flex-col flex-grow">
                     <h2 class="text-lg font-medium mb-6">联系方式</h2>
                     <div class="space-y-4">
-                        <div class="p-4 bg-yellow-50/50 border border-yellow-100 rounded-xl text-sm text-yellow-800 mb-6 flex items-start gap-2">
+                        <div
+                            class="p-4 bg-yellow-50/50 border border-yellow-100 rounded-xl text-sm text-yellow-800 mb-6 flex items-start gap-2">
                             <span class="mt-0.5 whitespace-nowrap">💡</span>
                             <span>为了保障交易安全，我们将通过闲鱼与您取得联系。</span>
                         </div>
                         <div>
                             <label class="block text-sm text-slate-500 mb-2">请输入您的闲鱼 ID</label>
-                            <input type="text" name="xianyuId" id="xianyuId" placeholder="例如：tb_123456" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-800/10 focus:border-slate-800 transition-all text-[15px]" oninput="checkValidity()">
+                            <input type="text" name="xianyuId" id="xianyuId" placeholder="例如：tb_123456"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-800/10 focus:border-slate-800 transition-all text-[15px]"
+                                oninput="validateStep()">
                         </div>
                     </div>
                 </div>
             </form>
 
             <!-- Success State -->
-            <div id="success-state" class="hidden flex-col items-center justify-center h-full flex-grow text-center space-y-4 py-8 animate-[fadeIn_0.5s_ease-out]">
+            <div id="success-state"
+                class="hidden flex-col items-center justify-center h-full flex-grow text-center space-y-4 py-8 animate-[fadeIn_0.5s_ease-out]">
                 <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-2">
                     <svg class="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
                 <h2 class="text-xl font-medium">需求已接收</h2>
-                <p class="text-sm text-slate-500 bg-slate-50 px-4 py-3 rounded-lg border border-slate-100 leading-relaxed">
+                <p
+                    class="text-sm text-slate-500 bg-slate-50 px-4 py-3 rounded-lg border border-slate-100 leading-relaxed">
                     主理人每晚统一复核<br>请留意闲鱼私信
                 </p>
             </div>
 
             <!-- Footer Navigation -->
             <div id="footer-nav" class="pt-8 mt-auto flex items-center justify-between gap-4">
-                <button type="button" id="prev-btn" class="px-6 py-3.5 text-sm font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-50 rounded-xl transition-colors shrink-0 invisible" onclick="prevStep()">
+                <button type="button" id="prev-btn"
+                    class="px-6 py-3.5 text-sm font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-50 rounded-xl transition-colors shrink-0 invisible"
+                    onclick="prevStep()">
                     返回
                 </button>
                 <div id="empty-space" class="w-[72px] hidden"></div>
-                <button type="button" id="next-btn" class="flex-grow px-6 py-3.5 text-sm font-medium rounded-xl transition-all" onclick="nextStep()">
+                <button type="button" id="next-btn"
+                    class="flex-grow px-6 py-3.5 text-sm font-medium rounded-xl transition-all" onclick="nextStep()">
                     下一步
                 </button>
-                <button type="button" id="submit-btn" class="hidden flex-grow px-6 py-3.5 text-sm font-medium rounded-xl transition-all" onclick="submitForm()">
+                <button type="button" id="submit-btn"
+                    class="hidden flex-grow px-6 py-3.5 text-sm font-medium rounded-xl transition-all"
+                    onclick="submitForm()">
                     完成评估，等待 21:20 回访
                 </button>
             </div>
@@ -205,7 +230,7 @@
 
             const prevBtn = document.getElementById('prev-btn');
             const emptySpace = document.getElementById('empty-space');
-            
+
             if (currentStep > 1) {
                 prevBtn.classList.remove('invisible', 'hidden');
                 emptySpace.classList.add('hidden');
@@ -225,7 +250,7 @@
                 submitBtn.classList.remove('hidden');
             }
 
-            checkValidity();
+            validateStep();
         }
 
         function showStep(newStep, isNext) {
@@ -234,40 +259,40 @@
 
             const oldEl = document.getElementById(`step-${currentStep}`);
             let newEl;
-            if(newStep !== null) {
-               newEl = document.getElementById(`step-${newStep}`);
+            if (newStep !== null) {
+                newEl = document.getElementById(`step-${newStep}`);
             }
 
             // Start exit animation for old element
             oldEl.classList.remove('active');
             oldEl.style.transform = isNext ? 'translateX(-20px)' : 'translateX(20px)';
             oldEl.style.opacity = '0';
-            
+
             setTimeout(() => {
                 oldEl.style.display = 'none';
-                
+
                 if (newEl) {
                     newEl.style.display = 'flex';
                     // Reset position before intro
                     newEl.style.transform = isNext ? 'translateX(20px)' : 'translateX(-20px)';
                     newEl.style.opacity = '0';
-                    
+
                     // Force reflow
                     void newEl.offsetWidth;
-                    
+
                     // Start entrance animation
                     newEl.classList.add('active');
                     newEl.style.transform = 'translateX(0)';
                     newEl.style.opacity = '1';
                 }
-                
+
                 setTimeout(() => {
-                   isTransitioning = false;
+                    isTransitioning = false;
                 }, 300);
 
             }, 300);
-            
-            if(newStep !== null) {
+
+            if (newStep !== null) {
                 currentStep = newStep;
                 updateUI();
             }
@@ -298,16 +323,16 @@
         }
 
         function setButtonState(btn, isValid) {
+            btn.disabled = !isValid;
+            btn.className = "flex-grow px-6 py-3.5 text-sm font-medium rounded-xl transition-all";
             if (isValid) {
-                btn.disabled = false;
-                btn.className = btn.className.replace(/bg-slate-100 text-slate-400 cursor-not-allowed/g, '') + ' bg-slate-800 text-white hover:bg-slate-900 shadow-sm hover:shadow active:scale-[0.98]';
+                btn.classList.add('bg-slate-800', 'text-white', 'hover:bg-slate-900', 'shadow-sm', 'hover:shadow', 'active:scale-[0.98]');
             } else {
-                btn.disabled = true;
-                btn.className = btn.className.replace(/bg-slate-800 text-white hover:bg-slate-900 shadow-sm hover:shadow active:scale-\[0\.98\]/g, '') + ' bg-slate-100 text-slate-400 cursor-not-allowed';
+                btn.classList.add('bg-slate-100', 'text-slate-400', 'cursor-not-allowed');
             }
         }
 
-        function checkValidity() {
+        function validateStep() {
             const isValid = isStepValid();
             const btn = currentStep === totalSteps ? document.getElementById('submit-btn') : document.getElementById('next-btn');
             setButtonState(btn, isValid);
@@ -315,7 +340,7 @@
 
         function submitForm() {
             if (!isStepValid()) return;
-            
+
             // Collect Data
             const data = {
                 projectType: document.querySelector('input[name="projectType"]:checked')?.value,
@@ -328,15 +353,15 @@
 
             // Transition to success screen
             document.getElementById('header-section').style.display = 'none';
-            
+
             const formContainer = document.getElementById('wizard-form');
             formContainer.style.opacity = '0';
             document.getElementById('footer-nav').style.opacity = '0';
-            
+
             setTimeout(() => {
                 formContainer.style.display = 'none';
                 document.getElementById('footer-nav').style.display = 'none';
-                
+
                 const successState = document.getElementById('success-state');
                 successState.style.display = 'flex';
                 successState.classList.remove('hidden');
@@ -346,9 +371,9 @@
         // Auto focus text areas when entering step 3 & 4
         setInterval(() => {
             if (!isTransitioning) {
-               if (currentStep === 3 && document.activeElement !== document.getElementById('coreFunction')) {
-                   // Only focus if something isn't already focused, prevent weird scrolling
-               }   
+                if (currentStep === 3 && document.activeElement !== document.getElementById('coreFunction')) {
+                    // Only focus if something isn't already focused, prevent weird scrolling
+                }
             }
         }, 500);
 
@@ -356,4 +381,5 @@
         updateUI();
     </script>
 </body>
+
 </html>
